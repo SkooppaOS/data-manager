@@ -26,10 +26,10 @@ trait ManagesItemsTrait
      * Build a new manager instance
      * @param array $items
      */
-    public function __construct($items = [])
-    {
-        $this->initManager($items);
-    }
+//    public function __construct($items = [])
+//    {
+//        $this->initManager($items);
+//    }
 
     /**
      * Initializes a new manager instance.
@@ -102,18 +102,6 @@ trait ManagesItemsTrait
             $currentLevel++;
         }
         $loc = $item;
-
-        // No, we are adding a single item
-//        try {
-//            $loc = &$this->items;
-//            foreach (explode('.', $alias) as $step) {
-//                $loc = &$loc[$step];
-//            }
-//            $loc = $item;
-//        } catch (\Exception $e) {
-//            die(print_r($e->getCode()));
-//            throw new NestingUnderNonArrayException($e->getMessage());
-//        }
 
         return $this;
     }
@@ -245,12 +233,14 @@ trait ManagesItemsTrait
     }
 
     /**
-     * Returns json serialized representation of array of items
+     * Get the collection of items as JSON.
+     *
+     * @param  int  $options
      * @return string
      */
-    public function toJson()
+    public function toJson($options = 0)
     {
-        return json_encode($this->getAll());
+        return json_encode($this->toArray(), $options);
     }
 
     /**
