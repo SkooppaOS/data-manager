@@ -32,6 +32,15 @@ class Manager implements
     use ManagesItemsTrait, ChainsNestedItemsTrait;
 
     /**
+     * Build a new manager instance
+     * @param array $items
+     */
+    public function __construct($items = [])
+    {
+        $this->initManager($items);
+    }
+
+    /**
      * @implements ArrayAccess
      */
     public function offsetExists($offset)

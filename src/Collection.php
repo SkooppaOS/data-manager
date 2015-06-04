@@ -22,15 +22,27 @@ use Michaels\Manager\Traits\ManagesItemsTrait;
  *
  * @package Michaels\Manager
  */
-class Collection extends \Illuminate\Support\Collection
-//    implements
-//    ManagesItemsInterface,
-//    ContainerInterface,
-//    ArrayAccess,
-//    Countable,
-//    IteratorAggregate,
-//    JsonSerializable
+class Collection extends \Illuminate\Support\Collection implements
+    ManagesItemsInterface,
+    ContainerInterface,
+    ArrayAccess,
+    Countable,
+    IteratorAggregate,
+    JsonSerializable
 {
     use ManagesItemsTrait;
-//        , ArrayableTrait;
+
+    /**
+     * The items contained in the collection.
+     *
+     * @var array
+     */
+    protected $items = [];
+
+    public function __construct($items = [])
+    {
+        $items = is_null($items) ? [] : $this->getArrayableItems($items);
+
+        $this->initManager((array) $items);
+    }
 }
